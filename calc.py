@@ -10,6 +10,7 @@ from tkinter import messagebox
 class Calc:
     def __init__(self, window):
     #=======================Global Variables==============================
+##        self.equation textvariable what is been displayed on screen
         self.equation = tk.StringVar()
         self.equation.set("0")
         self.expression = "0"
@@ -47,7 +48,8 @@ class Calc:
         buttonroot.grid(row = 0, column = 1, padx = 1, pady = 1)
 
         buttonSqu = tk.Button(buttonFrame, width = 3, height = 1, text = "x2", font = ("Arial", 16, "bold"),
-                            fg = "white", bg = "#1a1a1a", command = lambda:tkmath.pow(float(self.expression), 2, self.equation),
+                            fg = "white", bg = "#1a1a1a",
+                              command = lambda:tkmath.pow(float(self.expression), 2,self.equation),
                               activebackground = "#262626")
         buttonSqu.grid(row = 0, column = 2, padx = 1, pady = 1)
 
@@ -164,10 +166,14 @@ class Calc:
 
     def equalPress(self):
         """ prints the result of the calculation"""
-        self.result = str(eval(self.expression))
-        self.expression = self.result
-        self.equation.set(self.expression)
-    ##    print(self.expression)
+        try:
+            self.result = str(eval(self.expression))
+            self.expression = self.result
+            self.equation.set(self.expression)
+        except ZeroDivisionError:
+            self.equation.set("cannot divide by zero") 
+        
+##        print(self.expression)
 
     def operatorPress(self, operator):
         """ prints operator clicked """
