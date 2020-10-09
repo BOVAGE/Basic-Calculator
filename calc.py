@@ -161,7 +161,7 @@ class Calc:
         if self.expression == self.result or self.expression == "0":
             self.expression = ""
         self.expression += str(num)
-    ##    print(self.expression)
+        print(self.expression)
         self.equation.set(self.expression)
 
     def equalPress(self):
@@ -169,6 +169,9 @@ class Calc:
         try:
             self.result = str(eval(self.expression))
             self.expression = self.result
+            print(self.result)
+            print("=====")
+            print(self.expression)
             self.equation.set(self.expression)
         except ZeroDivisionError:
             self.equation.set("cannot divide by zero") 
@@ -191,11 +194,11 @@ class Calc:
         if self.result != self.expression:
             #expression is manipulated to list so that pop() can be used
             deletedList = " ".join(self.expression).split(" ")
-    ##        print(deletedList)
+            print(deletedList)
             deletedList.pop()
-    ##        print(deletedList)
-            expression = "".join(deletedList)
-    ##        print(self.expression)
+            print(deletedList)
+            self.expression = "".join(deletedList)
+            print(self.expression)
             self.equation.set(self.expression)
        
     def reset(self):
@@ -215,6 +218,7 @@ def main():
     root.configure(bg = "#262626")
     root.title("Calculator")
     calculator = Calc(root)
+    root.mainloop()
 
 if __name__ == "__main__":
     main()
