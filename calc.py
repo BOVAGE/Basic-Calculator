@@ -4,22 +4,60 @@ Author = Fayemi Boluwatife
 """
 
 import tkinter as tk
-import math, tkmath
+import math
 from tkinter import messagebox
 
-class Calc:
-    def __init__(self, window):
-    #=======================Global Variables==============================
-##        self.equation textvariable what is been displayed on screen
+
+class TkMath:
+    def __init__(self):
+        #self.equation textvariable what is been displayed on screen
         self.equation = tk.StringVar()
         self.equation.set("0")
+
+        #self.expression stores what is being typed
         self.expression = "0"
         self.result = ""
-        self.operators = ("+", "-", "*", "/")
+        
+    def pow(self,y, textvariable, updateX: bool = True):
+        """ print the self.expression**y to the desired widjet. """
+        answer = math.pow(float(self.expression),y)
+        textvariable.set(answer)
+        print(answer)
+        if updateX:
+            self.expression  = answer
+
+    def squroot(self, textvariable, updateX: bool = True):
+        """ print the sqr(self.expression) to the desired widjet. """
+        answer = math.sqrt(float(self.expression))
+        textvariable.set(answer)
+        print(answer)
+        if updateX:
+            self.expression  = answer
+
+    def reciprocal(self, textvariable, updateX: bool = True):
+        """ print 1/self.expression to the desired widjet """
+        try:
+            answer = 1/self.expression
+            textvariable.set(answer)
+            print(answer)
+            if updateX:
+                self.expression  = answer
+        except ZeroDivisionError:
+            textvariable.set("Cannot divide by Zero")
+        finally:
+            print("Finally")
+
+            
+class Calc(TkMath):
+    def __init__(self, window):
+        super().__init__()
+        self.operators: tuple = ("+", "-", "*", "/")
+        
     #===================Menu=======================================
         menubar = tk.Menu(window)
         menubar.add_command(label = "About", command = self.aboutdev)
         window.config(menu = menubar)
+        
     #===================Frames=======================================
         screenFrame = tk.Frame(window, bd = 2, width = 100, height = 200, bg = "white",
                                relief = "flat")
@@ -43,19 +81,19 @@ class Calc:
 
 
         buttonroot = tk.Button(buttonFrame, width = 3, height = 1, text = "√", font = ("Arial", 16, "bold"),
-                            fg = "white", bg = "#1a1a1a", command = lambda: tkmath.squroot(float(self.expression), self.equation),
+                            fg = "white", bg = "#1a1a1a", command = lambda: self.squroot(self.equation),
                                activebackground = "#262626")
         buttonroot.grid(row = 0, column = 1, padx = 1, pady = 1)
 
         buttonSqu = tk.Button(buttonFrame, width = 3, height = 1, text = "x2", font = ("Arial", 16, "bold"),
                             fg = "white", bg = "#1a1a1a",
-                              command = lambda:tkmath.pow(float(self.expression), 2,self.equation),
+                              command = lambda:self.pow(2, self.equation),
                               activebackground = "#262626")
         buttonSqu.grid(row = 0, column = 2, padx = 1, pady = 1)
 
         buttonReciprocal = tk.Button(buttonFrame, width = 3, height = 1, text = "1/x", font = ("Arial", 16, "bold"),
                             fg = "white", bg = "#1a1a1a", activebackground = "#262626",
-                                     command = lambda: tkmath.reciprocal(float(self.expression), self.equation))
+                                     command = lambda: self.reciprocal(self.equation))
         buttonReciprocal.grid(row = 0, column = 3, padx = 1, pady = 1)
 
         buttonCE = tk.Button(buttonFrame, width = 3, height = 1, text = "CE", font = ("Arial", 16),
@@ -156,7 +194,7 @@ class Calc:
                                 activebackground = "#262626")
         buttonequal.grid(row = 5, column = 3, padx = 1, pady = 1)
 
-    def press(self, num):
+    def press(self, num: int):
         """ prints num clicked """
         if self.expression == self.result or self.expression == "0":
             self.expression = ""
@@ -178,7 +216,7 @@ class Calc:
         
 ##        print(self.expression)
 
-    def operatorPress(self, operator):
+    def operatorPress(self, operator: str):
         """ prints operator clicked """
         if not self.expression.endswith(self.operators):
             self.expression += operator
