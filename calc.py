@@ -64,7 +64,7 @@ class Calc(TkMath):
         screenFrame.grid(row = 0, column = 0, pady = 5, padx = 5, ipadx = 0)
 
         screen = tk.Label(screenFrame, bd = 2, width = 15, height = 3, textvariable = self.equation,
-                          bg = "#1a1a1a", fg = "white", font = ("Arial", 20, "bold"),
+                          bg = "#1a1a1a", fg = "white", font = ("Arial", 20, "bold"), justify = "right",
                           relief = "raise", anchor = "e", wraplength = "256")
         screen.grid(row = 0, column = 0)
 
@@ -218,13 +218,13 @@ class Calc(TkMath):
 
     def operatorPress(self, operator: str):
         """ prints operator clicked """
-        if not self.expression.endswith(self.operators):
+        if not str(self.expression).endswith(self.operators):
             self.expression += operator
     ##        print(self.expression)
             self.equation.set(self.expression)
         else:
             self.expression = self.expression[:-1] + operator
-    ##        print(expression)
+    ##        print(self.expression)
             self.equation.set(self.expression)
         
     def delete(self):
@@ -255,6 +255,7 @@ def main():
     root = tk.Tk()
     root.configure(bg = "#262626")
     root.title("Calculator")
+    root.iconbitmap("logo.ico")
     calculator = Calc(root)
     root.mainloop()
 
