@@ -24,7 +24,7 @@ class TkMath:
         textvariable.set(answer)
         print(answer)
         if updateX:
-            self.expression  = answer
+            self.expression  = str(answer)
 
     def squroot(self, textvariable, updateX: bool = True):
         """ print the sqr(self.expression) to the desired widjet. """
@@ -32,7 +32,7 @@ class TkMath:
         textvariable.set(answer)
         print(answer)
         if updateX:
-            self.expression  = answer
+            self.expression  = str(answer)
 
     def reciprocal(self, textvariable, updateX: bool = True):
         """ print 1/self.expression to the desired widjet """
@@ -41,7 +41,7 @@ class TkMath:
             textvariable.set(answer)
             print(answer)
             if updateX:
-                self.expression  = answer
+                self.expression  = str(answer)
         except ZeroDivisionError:
             textvariable.set("Cannot divide by Zero")
         finally:
@@ -63,9 +63,10 @@ class Calc(TkMath):
                                relief = "flat")
         screenFrame.grid(row = 0, column = 0, pady = 5, padx = 5, ipadx = 0)
 
+        #wraplength value set the screen to fit 17 characters at a row (17 * 15-width)
         screen = tk.Label(screenFrame, bd = 2, width = 15, height = 3, textvariable = self.equation,
                           bg = "#1a1a1a", fg = "white", font = ("Arial", 20, "bold"), justify = "right",
-                          relief = "raise", anchor = "e", wraplength = "256")
+                          relief = "raise", anchor = "e", wraplength = "255")
         screen.grid(row = 0, column = 0)
 
         buttonFrame = tk.Frame(window, bd = 2, width = 100, height = 300, bg = "#262626",
