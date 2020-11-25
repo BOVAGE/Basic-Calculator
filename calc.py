@@ -113,7 +113,7 @@ class Calc(TkMath):
         buttonDel.grid(row = 1, column = 2, padx = 1, pady = 1)
 
         buttonDivider = tk.Button(buttonFrame, width = 3, height = 1, text = "÷", font = ("Arial", 16),
-                            fg = "white", bg = "#1a1a1a",command = lambda: self.operatorPress("/"), activebackground = "#262626")
+                            fg = "white", bg = "#1a1a1a",command = lambda: self.operator_press("/"), activebackground = "#262626")
         buttonDivider.grid(row = 1, column = 3, padx = 1, pady = 1)
 
         button7 = tk.Button(buttonFrame, width = 3, height = 1, text = 7, font = ("Arial", 16, "bold"),
@@ -132,7 +132,7 @@ class Calc(TkMath):
         button9.grid(row = 2, column = 2, padx = 1, pady = 1)
 
         buttonX = tk.Button(buttonFrame, width = 3, height = 1, text = "X", font = ("Arial", 16),
-                            fg = "white", bg = "#1a1a1a", command = lambda: self.operatorPress("*"),
+                            fg = "white", bg = "#1a1a1a", command = lambda: self.operator_press("*"),
                             activebackground = "#262626")
         buttonX.grid(row = 2, column = 3, padx = 1, pady = 1)
 
@@ -152,7 +152,7 @@ class Calc(TkMath):
         button6.grid(row = 3, column = 2, padx = 1, pady = 1)
 
         buttonminus = tk.Button(buttonFrame, width = 3, height = 1, text = "-", font = ("Arial", 16),
-                            fg = "white", bg = "#1a1a1a", command = lambda: self.operatorPress("-"),
+                            fg = "white", bg = "#1a1a1a", command = lambda: self.operator_press("-"),
                                 activebackground = "#262626")
         buttonminus.grid(row = 3, column = 3, padx = 1, pady = 1)
 
@@ -172,7 +172,7 @@ class Calc(TkMath):
         button3.grid(row = 4, column = 2, padx = 1, pady = 1)
 
         buttonPlus = tk.Button(buttonFrame, width = 3, height = 1, text = "+", font = ("Arial", 16),
-                            fg = "white", bg = "#1a1a1a", command = lambda: self.operatorPress("+"),
+                            fg = "white", bg = "#1a1a1a", command = lambda: self.operator_press("+"),
                                activebackground = "#262626")
         buttonPlus.grid(row = 4, column = 3, padx = 1, pady = 1)
 
@@ -191,7 +191,7 @@ class Calc(TkMath):
         buttonpoint.grid(row = 5, column = 2, padx = 1, pady = 1)
 
         buttonequal = tk.Button(buttonFrame, width = 3, height = 1, text = "=", font = ("Arial", 16),
-                            fg = "white", bg = "#1a1a1a", command = self.equalPress,
+                            fg = "white", bg = "#1a1a1a", command = self.equal_press,
                                 activebackground = "#262626")
         buttonequal.grid(row = 5, column = 3, padx = 1, pady = 1)
 
@@ -203,7 +203,7 @@ class Calc(TkMath):
         print(self.expression)
         self.equation.set(self.expression)
 
-    def equalPress(self):
+    def equal_press(self):
         """ prints the result of the calculation"""
         try:
             self.result = str(eval(self.expression))
@@ -217,7 +217,7 @@ class Calc(TkMath):
         
 ##        print(self.expression)
 
-    def operatorPress(self, operator: str):
+    def operator_press(self, operator: str):
         """ prints operator clicked """
         if not str(self.expression).endswith(self.operators):
             self.expression += operator
