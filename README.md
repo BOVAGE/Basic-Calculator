@@ -6,7 +6,7 @@ Basic Calculator is a gui app developed using python and tkinter framework. It c
 
 ## Screenshot
 
-![Calculator image](/images/calc1.jpg "The Calculator on opening")
+![Calculator image](images/calc1.jpg "The Calculator on opening")
 
 ![Calculator image](/images/calc2.jpg "The Calculator performing operation")
 
