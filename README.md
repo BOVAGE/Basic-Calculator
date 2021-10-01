@@ -15,7 +15,7 @@ Basic Calculator is a gui app developed using python and tkinter framework. It c
 ![Calculator image](/images/calc4.JPG "The Calculator's about")
 
 ## Inspiration
-I'm trying to build a clone of **Windows 10** calculator
+Trying to build a clone of **Windows 10** calculator
 
 ## Contributing
 
